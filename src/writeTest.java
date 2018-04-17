@@ -13,10 +13,10 @@ public class writeTest {
                 bw.write("欢迎使用Java");
                 bw.newLine();
             }
+            bw.close();
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 }

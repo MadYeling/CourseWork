@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -9,7 +8,7 @@ public class readTest {
         try {
             FileReader fr = new FileReader("E:\\hello.txt");
             BufferedReader br = new BufferedReader(fr);
-            String str = "";
+            String str;
             while ((str = br.readLine()) != null)
                 System.out.println(str);
             br.close();

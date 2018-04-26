@@ -13,8 +13,10 @@ public class xl2 {
                 return new File(dir, name).isFile() && name.endsWith(".txt");
             }
         });
+
         System.out.println("\n以下是后缀为.txt的文件：");
         for (String name : filenameFilter)
             System.out.println(name);
+
     }
 }

@@ -21,16 +21,5 @@ public class xl1 {
 
         }
 
-        File file1 = new File("E:\\");
-        String[] filenameFilter = file1.list(new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                return new File(dir, name).isFile() && name.endsWith(".txt");
-            }
-        });
-        System.out.println("\n以下是后缀为.txt的文件：");
-        for (String name : filenameFilter)
-        System.out.println(name);
-
     }
 }

@@ -14,7 +14,7 @@ public class IOExam {
             }
             fr.close();
             System.out.println("字母a出现的次数为" + b);
-            System.out.println("字母a出现的次数为" + c);
+            System.out.println("字母A出现的次数为" + c);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,7 +37,7 @@ public class IOExam {
             }
 
             System.out.println("字母a出现的次数为" + b);
-            System.out.println("字母a出现的次数为" + c);
+            System.out.println("字母A出现的次数为" + c);
 
         } catch (IOException e) {
             e.printStackTrace();

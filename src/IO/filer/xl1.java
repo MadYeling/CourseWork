@@ -1,7 +1,6 @@
-package filer;
+package IO.filer;
 
 import java.io.File;
-import java.io.FilenameFilter;
 
 public class xl1 {
     public static void main(String[] args) {

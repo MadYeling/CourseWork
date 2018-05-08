@@ -8,7 +8,7 @@ public class serveTest {
         try {
             ServerSocket ss = new ServerSocket(25565);
             ss.accept();
-            System.out.println("000");
+            System.out.println("Minecraft!");
         } catch (IOException e) {
             e.printStackTrace();
         }

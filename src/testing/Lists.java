@@ -9,7 +9,7 @@ public class Lists {
         Worker worker2 = new Worker("li4", 25, 3500);
         Worker worker3 = new Worker("wang5", 22, 3200);
 
-        ArrayList al = new ArrayList();
+        ArrayList<Worker> al = new ArrayList<>();
         al.add(worker1);
         al.add(worker2);
         al.add(worker3);

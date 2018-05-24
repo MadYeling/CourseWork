@@ -42,6 +42,7 @@ public class Worker {
         System.out.println(name + " work");
     }
 
+    @Override
     public String toString() {
         return "Name:" + name + "\tAge:" + age + "\tSalary:" + salary;
     }

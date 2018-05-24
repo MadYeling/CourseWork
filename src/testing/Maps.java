@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Maps {
     public static void main(String[] args) {
-        Map map = new HashMap();
+        Map<Integer, String> map = new HashMap<>();
         map.put(1930, "乌拉奎");
         map.put(1934, "意大利");
         map.put(1938, "意大利");
@@ -36,7 +36,7 @@ public class Maps {
             } else {
                 System.out.println("该年没有举办世界杯或暂无数据");
             }
-        }else {
+        } else {
             System.out.println("请输入有效年份");
         }
 

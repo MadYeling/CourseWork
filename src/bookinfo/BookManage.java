@@ -36,11 +36,13 @@ public class BookManage {
 //            System.out.println(aBookList);
 
         Scanner sc = new Scanner(System.in);
+        System.out.println("输入图书编号");
         int bookID = sc.nextInt();
-
         Books stockBooks = getBooks(bookID);
-        if (stockBooks!=null){
+
+        if (stockBooks != null) {
             System.out.println(stockBooks);
         }
+
     }
 }

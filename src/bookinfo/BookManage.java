@@ -1,5 +1,8 @@
 package bookinfo;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class BookManage {
@@ -19,13 +22,9 @@ public class BookManage {
         bookList.add(books5);
     }
 
-    private static Books getBooks(int bookID) {
-        for (Books thisBooks : bookList) {
-            if (bookID == thisBooks.getNumber()) {
-                return thisBooks;
-            }
-        }
-        return null;
+    private static void Enter() throws IOException {//停顿
+        System.out.println("按回车继续");
+        new BufferedReader(new InputStreamReader(System.in)).readLine();
     }
 
     public static void main(String[] args) {
@@ -34,6 +33,13 @@ public class BookManage {
         for (Books aBookList : bookList)
             FileUtil.saveBooks(aBookList);
 
+        try {//按回车继续
+            Enter();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        FileUtil.loadBooks();//读取图书并对第3本和第4本涨价然后重新写入book.txt
 
     }
 }

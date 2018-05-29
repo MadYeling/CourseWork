@@ -49,7 +49,7 @@ public class Books {
         return price;
     }
 
-    public void setPrice(float price) {
+    void setPrice(float price) {
         this.price = price;
     }
 

@@ -3,6 +3,43 @@ package bookinfo;
 import java.io.*;
 
 class FileUtil {
+
+    static void loadBooks() {
+        BufferedReader bufferedReader;
+        try {
+            bufferedReader = new BufferedReader(new FileReader("book.txt"));
+            String str;
+            Books[] books = new Books[5];
+            int i = 0;
+
+            while ((str = bufferedReader.readLine()) != null) {
+
+                if (str.equals("图书编号,图书名称,图书版本,图书价格,销售额,")) {
+                    continue;
+                }
+
+                String[] str1 = str.split(",");
+                books[i] = new Books(Integer.parseInt(str1[0]), str1[1], str1[2], Float.parseFloat(str1[3]), Integer.parseInt(str1[4]));
+                i++;
+            }
+
+//            for (int j = 0; j < 5; j++)
+//                System.out.println(books[j]);
+
+            books[2].setPrice(books[2].getPrice() + 20);
+            books[3].setPrice(books[3].getPrice() + 30);
+
+            for (int j = 0; j < 5; j++) {
+//                System.out.println(books[j]);
+                saveBooks(books[j]);
+            }
+            System.out.println("完成了涨价");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     static void saveBooks(Books books) {
         String name = "book.txt";
         InputStream is;
@@ -12,7 +49,7 @@ class FileUtil {
             createFile(name, true, books);
 
         } catch (FileNotFoundException e) {
-            //没有读到文件，需要添加label头
+            //没有读到文件，需要添加表头
             createFile(name, false, books);
         } catch (IOException e) {
             e.printStackTrace();
@@ -50,8 +87,8 @@ class FileUtil {
             sb.append(books.getSales()).append(",");//销量
             System.out.println("追加了一些信息");
 
-            String str1 = sb.toString();//将StringBuilder转换为String
-            byte[] b = str1.getBytes();//写入单个字节
+            String str1 = sb.toString();
+            byte[] b = str1.getBytes();
 
             for (byte aB : b) {//遍历字节
                 out.write(aB);
@@ -77,11 +114,15 @@ class FileUtil {
             bufferedReader = new BufferedReader(new FileReader(name));
             String str;
             while ((str = bufferedReader.readLine()) != null) {
-                if (str.substring(0, 4).equals("1005")) {//防止修改价格后读取不到对应字节
-                    System.out.println("文件似乎被写过了");
-                    bufferedReader.close();
-                    return true;
+
+                if (!str.isEmpty()) {//防止读取到空行出现错误
+                    if (str.substring(0, 4).equals("1005")) {//防止修改价格后读取不到对应字节
+                        System.out.println("文件似乎被写过了");
+                        bufferedReader.close();
+                        return true;
+                    }
                 }
+
             }
             bufferedReader.close();
 
@@ -116,5 +157,4 @@ class FileUtil {
         System.out.println("未读取到表头");
         return false;
     }
-    //尝试合并isWrittenLast与isWrittenHead
 }

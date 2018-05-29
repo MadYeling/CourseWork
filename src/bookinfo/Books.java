@@ -5,7 +5,7 @@ public class Books {
     private String name, version;
     private float price;
 
-    public Books(int number, String name, String version, float price, int sales) {
+    Books(int number, String name, String version, float price, int sales) {
         this.number = number;
         this.sales = sales;
         this.name = name;
@@ -13,39 +13,39 @@ public class Books {
         this.price = price;
     }
 
-    public int getNumber() {
+    int getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    void setNumber(int number) {
         this.number = number;
     }
 
-    public int getSales() {
+    int getSales() {
         return sales;
     }
 
-    public void setSales(int sales) {
+    void setSales(int sales) {
         this.sales = sales;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         this.name = name;
     }
 
-    public String getVersion() {
+    String getVersion() {
         return version;
     }
 
-    public void setVersion(String version) {
+    void setVersion(String version) {
         this.version = version;
     }
 
-    public float getPrice() {
+    float getPrice() {
         return price;
     }
 

@@ -1,7 +1,6 @@
 package bookinfo;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class BookManage {
     private static ArrayList<Books> bookList = new ArrayList<>();
@@ -32,17 +31,9 @@ public class BookManage {
     public static void main(String[] args) {
         init();
 
-//        for (Books aBookList : bookList)
-//            System.out.println(aBookList);
+        for (Books aBookList : bookList)
+            FileUtil.saveBooks(aBookList);
 
-        Scanner sc = new Scanner(System.in);
-        System.out.println("输入图书编号");
-        int bookID = sc.nextInt();
-        Books stockBooks = getBooks(bookID);
-
-        if (stockBooks != null) {
-            System.out.println(stockBooks);
-        }
 
     }
 }

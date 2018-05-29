@@ -12,7 +12,7 @@ class FileUtil {
             createFile(name, true, books);
 
         } catch (FileNotFoundException e) {
-            //没有读到文件，添加label头
+            //没有读到文件，需要添加label头
             createFile(name, false, books);
         } catch (IOException e) {
             e.printStackTrace();
@@ -25,7 +25,7 @@ class FileUtil {
 
         try {
             if (isLabel & !(isWrittenLast(name) | !isWrittenHead(name))) {
-                //这里加入对文件末尾的判断，已存在信息则进行覆写，防止无限追加信息
+                //这里对文件开头与末尾进行判断，已存在信息则进行覆写，防止无限追加信息，开头无表头则追加表头。
 
                 out = new BufferedOutputStream(new FileOutputStream(name, true));//参数true代表每次输入属于追加信息
 
@@ -77,13 +77,16 @@ class FileUtil {
             bufferedReader = new BufferedReader(new FileReader(name));
             String str;
             while ((str = bufferedReader.readLine()) != null) {
-                if (str.substring(0,4).equals("1005")) {//防止修改价格后读取不到对应字节
+                if (str.substring(0, 4).equals("1005")) {//防止修改价格后读取不到对应字节
                     System.out.println("文件似乎被写过了");
                     bufferedReader.close();
                     return true;
                 }
             }
             bufferedReader.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("未读取到文件");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -103,9 +106,13 @@ class FileUtil {
                 }
             }
             bufferedReader.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("未读取到文件");
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         System.out.println("未读取到表头");
         return false;
     }

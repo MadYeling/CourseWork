@@ -3,12 +3,12 @@ package bookinfo;
 import java.io.*;
 
 class FileUtil {
-    private static final String NAME = "book.txt";
+    private static final String FILENAME = "book.txt";
 
     static void loadBooks() {
         BufferedReader bufferedReader;
         try {
-            bufferedReader = new BufferedReader(new FileReader(NAME));
+            bufferedReader = new BufferedReader(new FileReader(FILENAME));
             String str;
             Books[] books = new Books[5];
             int i = 0;
@@ -35,6 +35,7 @@ class FileUtil {
                 saveBooks(books[j]);
             }
             System.out.println("完成了涨价");
+            bufferedReader.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,7 +46,7 @@ class FileUtil {
 
         InputStream is;
         try {
-            is = new FileInputStream(NAME);//尝试读一下文件，没有读到抛出FileNotFoundException
+            is = new FileInputStream(FILENAME);//尝试读一下文件，没有读到抛出FileNotFoundException
             is.close();
             createFile(true, books);
 
@@ -65,11 +66,11 @@ class FileUtil {
             if (isLabel & !(isWrittenLast() | !isWrittenHead())) {
                 //这里对文件开头与末尾进行判断，已存在信息则进行覆写，防止无限追加信息，开头无表头则追加表头。
 
-                out = new BufferedOutputStream(new FileOutputStream(NAME, true));//参数true代表每次输入属于追加信息
+                out = new BufferedOutputStream(new FileOutputStream(FILENAME, true));//参数true代表每次输入属于追加信息
 
             } else {
 
-                out = new BufferedOutputStream(new FileOutputStream(NAME));
+                out = new BufferedOutputStream(new FileOutputStream(FILENAME));
                 String[] filedSort = new String[]{"图书编号", "图书名称", "图书版本", "图书价格", "销售额"};
 
                 for (String filedKey : filedSort) {//每个字段后面加","
@@ -112,7 +113,7 @@ class FileUtil {
     private static boolean isWrittenLast() {//查找是否写了最后一本书的内容
         BufferedReader bufferedReader;
         try {
-            bufferedReader = new BufferedReader(new FileReader(NAME));
+            bufferedReader = new BufferedReader(new FileReader(FILENAME));
             String str;
             while ((str = bufferedReader.readLine()) != null) {
 
@@ -139,7 +140,7 @@ class FileUtil {
     private static boolean isWrittenHead() {//查找是否写了表头
         BufferedReader bufferedReader;
         try {
-            bufferedReader = new BufferedReader(new FileReader(NAME));
+            bufferedReader = new BufferedReader(new FileReader(FILENAME));
             String str;
             while ((str = bufferedReader.readLine()) != null) {
                 if (str.equals("图书编号,图书名称,图书版本,图书价格,销售额,")) {

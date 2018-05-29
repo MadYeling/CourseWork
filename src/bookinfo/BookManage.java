@@ -23,6 +23,7 @@ public class BookManage {
     }
 
     private static void Enter() throws IOException {//停顿
+        System.out.println();
         System.out.println("按回车继续");
         new BufferedReader(new InputStreamReader(System.in)).readLine();
     }

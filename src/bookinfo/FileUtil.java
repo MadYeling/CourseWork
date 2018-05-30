@@ -6,7 +6,8 @@ class FileUtil {
     private static final String FILENAME = "book.txt";
 
     static void loadBooks() {
-        BufferedReader bufferedReader;
+        BufferedReader bufferedReader = null;
+
         try {
             bufferedReader = new BufferedReader(new FileReader(FILENAME));
             String str;
@@ -24,9 +25,6 @@ class FileUtil {
                 i++;
             }
 
-//            for (int j = 0; j < 5; j++)
-//                System.out.println(books[j]);
-
             books[2].setPrice(books[2].getPrice() + 20);//第3本书涨价20
             books[3].setPrice(books[3].getPrice() + 30);//第4本书涨价30
 
@@ -35,30 +33,38 @@ class FileUtil {
                 saveBooks(books[j]);
             }
             System.out.println("完成了涨价");
-            bufferedReader.close();
 
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+
+            try {
+                if (bufferedReader != null)
+                    bufferedReader.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
         }
     }
 
     static void saveBooks(Books books) {
-
         InputStream is;
+
         try {
             is = new FileInputStream(FILENAME);//尝试读一下文件，没有读到抛出FileNotFoundException
             is.close();
-            createFile(true, books);
+            createFile(books, true);
 
         } catch (FileNotFoundException e) {
             //没有读到文件，需要添加表头
-            createFile(false, books);
+            createFile(books, false);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void createFile(Boolean isLabel, Books books) {
+    private static void createFile(Books books, Boolean isLabel) {
         BufferedOutputStream out = null;
         StringBuilder sb = new StringBuilder();
 
@@ -99,6 +105,7 @@ class FileUtil {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {//无论是否出错都关闭out流
+
             try {
                 if (out != null)
                     out.close();
@@ -106,15 +113,18 @@ class FileUtil {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+
         }
 
     }
 
     private static boolean isWrittenLast() {//查找是否写了最后一本书的内容
-        BufferedReader bufferedReader;
+        BufferedReader bufferedReader = null;
+
         try {
             bufferedReader = new BufferedReader(new FileReader(FILENAME));
             String str;
+
             while ((str = bufferedReader.readLine()) != null) {
 
                 if (!str.isEmpty()) {//防止读取到空行出现错误
@@ -126,34 +136,52 @@ class FileUtil {
                 }
 
             }
-            bufferedReader.close();
 
         } catch (FileNotFoundException e) {
             System.out.println("未读取到文件");
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+
+            try {
+                if (bufferedReader != null)
+                    bufferedReader.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
         }
 
         return false;
     }
 
     private static boolean isWrittenHead() {//查找是否写了表头
-        BufferedReader bufferedReader;
+        BufferedReader bufferedReader = null;
+
         try {
             bufferedReader = new BufferedReader(new FileReader(FILENAME));
             String str;
+
             while ((str = bufferedReader.readLine()) != null) {
                 if (str.equals("图书编号,图书名称,图书版本,图书价格,销售额,")) {
                     bufferedReader.close();
                     return true;
                 }
             }
-            bufferedReader.close();
 
         } catch (FileNotFoundException e) {
             System.out.println("未读取到文件");
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+
+            try {
+                if (bufferedReader != null)
+                    bufferedReader.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
         }
 
         System.out.println("未读取到表头");
